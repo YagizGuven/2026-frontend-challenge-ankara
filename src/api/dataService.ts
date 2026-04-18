@@ -11,11 +11,11 @@ const formIds = {
 };
 
 const generateMockData = (): InvestigationRecord[] => [
-    { id: '1', timestamp: new Date(Date.now() - 1000 * 60 * 10), type: 'checkin', person: 'Alice Vance', location: 'Central Station', content: 'Arrived at the station. No sign of the package.', metadata: {} },
-    { id: '2', timestamp: new Date(Date.now() - 1000 * 60 * 45), type: 'tip', person: 'Anonymous', location: 'Pier 42', content: 'Saw someone dropping a black briefcase near the edge of the pier.', metadata: {} },
-    { id: '3', timestamp: new Date(Date.now() - 1000 * 60 * 120), type: 'sighting', person: 'Bob Dylan', location: 'Downtown Alley', content: 'A suspicious figure was seen running away.', metadata: {} },
-    { id: '4', timestamp: new Date(Date.now() - 1000 * 60 * 180), type: 'message', person: 'Alice Vance', location: '', content: 'I think I am being followed. Will drop the tracker soon.', metadata: {} },
-    { id: '5', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), type: 'note', person: 'Detective Harris', location: '', content: 'Alice Vance and Bob Dylan might be connected. Check Pier 42 records.', metadata: {} },
+    { id: '1', timestamp: new Date(Date.now() - 1000 * 60 * 10), type: 'checkin', person: 'Alice Vance', location: 'Ankara Kalesi', content: 'Arrived at the fortress. High vantage point secured.', metadata: {} },
+    { id: '2', timestamp: new Date(Date.now() - 1000 * 60 * 45), type: 'tip', person: 'Anonymous', location: 'Seğmenler Parkı', content: 'Saw someone dropping a black briefcase near the edge of the park.', metadata: {} },
+    { id: '3', timestamp: new Date(Date.now() - 1000 * 60 * 120), type: 'sighting', person: 'Bob Dylan', location: 'Tunali Hilmi', content: 'A suspicious figure was seen running away down the street.', metadata: {} },
+    { id: '4', timestamp: new Date(Date.now() - 1000 * 60 * 180), type: 'message', person: 'Alice Vance', location: 'Atakule', content: 'I think I am being followed. Will drop the tracker soon.', metadata: {} },
+    { id: '5', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), type: 'note', person: 'Detective Harris', location: 'Eymir Lake', content: 'Alice Vance and Bob Dylan might be connected. Check location records.', metadata: {} },
 ];
 
 export const fetchAllForms = async (): Promise<InvestigationRecord[]> => {

@@ -19,9 +19,7 @@ export const Sidebar = ({
     reliability, setReliability 
 }: SidebarProps) => {
     return (
-        <aside className="filter-sidebar glass-panel animate-slide-in">
-            <h3 className="font-medium text-xl mb-6">Investigation Filters</h3>
-            
+        <aside className="filter-sidebar">
             <div className="mb-6">
                 <label className="sidebar-label">Person of Interest / Keyword</label>
                 <div style={{ marginTop: '0.5rem' }}>
