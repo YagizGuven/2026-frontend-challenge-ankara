@@ -11,11 +11,12 @@ const formIds = {
 };
 
 const generateMockData = (): InvestigationRecord[] => [
-    { id: '1', timestamp: new Date(Date.now() - 1000 * 60 * 10), type: 'checkin', person: 'Alice Vance', location: 'Ankara Kalesi', content: 'Arrived at the fortress. High vantage point secured.', metadata: {} },
-    { id: '2', timestamp: new Date(Date.now() - 1000 * 60 * 45), type: 'tip', person: 'Anonymous', location: 'Seğmenler Parkı', content: 'Saw someone dropping a black briefcase near the edge of the park.', metadata: {} },
-    { id: '3', timestamp: new Date(Date.now() - 1000 * 60 * 120), type: 'sighting', person: 'Bob Dylan', location: 'Tunali Hilmi', content: 'A suspicious figure was seen running away down the street.', metadata: {} },
-    { id: '4', timestamp: new Date(Date.now() - 1000 * 60 * 180), type: 'message', person: 'Alice Vance', location: 'Atakule', content: 'I think I am being followed. Will drop the tracker soon.', metadata: {} },
-    { id: '5', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), type: 'note', person: 'Detective Harris', location: 'Eymir Lake', content: 'Alice Vance and Bob Dylan might be connected. Check location records.', metadata: {} },
+    { id: '1', timestamp: new Date('2026-04-18T14:02:00'), type: 'sighting', person: 'Podo', location: 'Ankara Kalesi', content: 'Saw Podo with Kağan. Kağan was explaining something; Podo looked hesitant.', metadata: {} },
+    { id: '2', timestamp: new Date('2026-04-18T13:45:00'), type: 'message', person: 'Kağan', location: 'Hamamönü', content: 'Eray, tell them we were at Hamamönü all afternoon. The last stop is Atakule. Keep the secret safe.', metadata: {} },
+    { id: '3', timestamp: new Date('2026-04-18T11:20:00'), type: 'checkin', person: 'Eray', location: 'Seğmenler Parkı', content: 'Waiting for Kağan. He is late.', metadata: {} },
+    { id: '4', timestamp: new Date('2026-04-18T10:15:00'), type: 'tip', person: 'Anonymous', location: 'Tunali Hilmi', content: 'A suspicious figure was seen running away down the street.', metadata: {} },
+    { id: '5', timestamp: new Date('2026-04-18T09:00:00'), type: 'note', person: 'Detective Harris', location: 'Eymir Lake', content: 'Investigation started. Podo is missing.', metadata: {} },
+    { id: '6', timestamp: new Date('2026-04-18T14:00:00'), type: 'checkin', person: 'Podo', location: 'CerModern', content: 'Arrived at the gallery. Looking for the drop point.', metadata: {} },
 ];
 
 export const fetchAllForms = async (): Promise<InvestigationRecord[]> => {

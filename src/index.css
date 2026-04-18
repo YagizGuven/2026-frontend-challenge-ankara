@@ -355,74 +355,63 @@ body {
   border: none;
 }
 
-/* --- Split Screen Layout (35% / 65%) --- */
+/* --- Split Screen Layout (HUD Mode) --- */
 .split-screen-dashboard {
-  display: flex;
-  flex-direction: column;
+  position: relative;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background: var(--bg-color);
-}
-
-.split-sidebar {
-  display: flex;
-  flex-direction: column;
-  background: var(--panel-bg); /* subtle differentiation */
-  border-right: 1px solid var(--border-color);
-  height: 50vh;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-/* Custom scrollbar for the timeline */
-.split-timeline::-webkit-scrollbar {
-  width: 6px;
-}
-.split-timeline::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
-}
-
-.split-header {
-  padding: 1.5rem 1.5rem 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-  flex-shrink: 0;
-}
-
-.split-filters {
-  border-bottom: 1px solid var(--border-color);
-  flex: 1;
-  overflow-y: auto;
-  min-height: 0;
-}
-
-.split-timeline {
-  padding: 1.5rem;
-  flex: 1;
-  overflow-y: auto;
-  min-height: 0;
 }
 
 .split-map {
-  flex: 1;
-  height: 50vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.split-sidebar {
   position: relative;
-  background: var(--bg-color); /* Underneath map tiles */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 15, 25, 0.75); /* Dark translucent */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  height: 100vh;
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
-  .split-screen-dashboard {
-    flex-direction: row;
-  }
   .split-sidebar {
-    width: 35%;
-    height: 100vh;
+    width: 400px; /* Fixed width HUD sidebar */
   }
-  .split-map {
-    width: 65%;
-    height: 100vh;
-  }
+}
+
+/* Sidebar Zones */
+.sidebar-sticky-zone {
+  flex-shrink: 0;
+}
+
+.sidebar-scroll-zone {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.sidebar-scroll-zone::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-scroll-zone::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.split-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .sidebar-label {
@@ -519,6 +508,154 @@ body {
 .leaflet-tile-container {
   /* Give the dark map a slight blue tint to match the theme */
   filter: sepia(0.2) hue-rotate(190deg) saturate(1.2);
+}
+
+/* --- Unified Brief Card (Stat Grid) --- */
+.stat-grid {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 1rem;
+}
+
+.stat-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.stat-value.suspect-glow {
+  color: #ff4b4b;
+  text-shadow: 0 0 10px rgba(255, 75, 75, 0.5);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* --- HUD Record Card --- */
+.record-card-hud {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 3px solid; /* dynamic color applied inline */
+  border-radius: 6px;
+  padding: 0.75rem; /* tight and professional */
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.record-card-hud:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.record-card-hud.suspicious-hud {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.2);
+  border-left-color: var(--danger-color) !important;
+}
+
+.record-header-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.record-person-hud {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.record-time-hud {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.record-content-hud {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.25rem 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.record-footer-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.record-location-hud {
+  color: var(--text-muted);
+}
+
+.record-link-hud {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+}
+
+.record-link-hud:hover {
+  text-decoration: underline;
+}
+
+.timeline-item.highlighted .record-card-hud {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  border-color: var(--accent-color);
+}
+
+/* --- Pill Group --- */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pill-btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.pill-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.pill-btn.active {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
 }
 
 .custom-div-icon {

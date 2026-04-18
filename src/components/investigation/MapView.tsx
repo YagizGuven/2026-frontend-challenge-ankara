@@ -43,36 +43,38 @@ export const MapView = ({ records, suspiciousIds, hoveredRecordId, onMarkerClick
     const recordsWithCoords = records.filter(r => r.coordinates);
 
     return (
-        <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%', zIndex: 0 }}>
-            {/* Using CartoDB Dark Matter for a sleek, high-contrast dark theme */}
-            <TileLayer
-                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
-            />
-            {recordsWithCoords.map(record => {
-                const isHovered = hoveredRecordId === record.id;
-                // Inherit suspicion logic
-                const isAutoSuspicious = record.type === 'tip' && record.person === 'Anonymous';
-                const isSuspicious = suspiciousIds.has(record.id) || isAutoSuspicious;
+        <div style={{ height: '100%', width: '100%', overflow: 'hidden' }}>
+            <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%', zIndex: 0 }}>
+                {/* Using CartoDB Dark Matter for a sleek, high-contrast dark theme */}
+                <TileLayer
+                    url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                    attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
+                />
+                {recordsWithCoords.map(record => {
+                    const isHovered = hoveredRecordId === record.id;
+                    // Inherit suspicion logic
+                    const isAutoSuspicious = record.type === 'tip' && record.person === 'Anonymous';
+                    const isSuspicious = suspiciousIds.has(record.id) || isAutoSuspicious;
 
-                return (
-                    <Marker 
-                        key={record.id} 
-                        position={record.coordinates!}
-                        icon={createCustomMarker(isSuspicious, isHovered)}
-                        eventHandlers={{
-                            click: () => onMarkerClick(record.id)
-                        }}
-                        zIndexOffset={isHovered ? 1000 : (isSuspicious ? 500 : 0)}
-                    >
-                        <Popup className="antigravity-popup">
-                            <div style={{ fontWeight: 600 }}>{record.person}</div>
-                            <div style={{ color: '#666', fontSize: '0.85em' }}>{record.location}</div>
-                        </Popup>
-                    </Marker>
-                );
-            })}
-            <BoundsUpdater records={recordsWithCoords} />
-        </MapContainer>
+                    return (
+                        <Marker 
+                            key={record.id} 
+                            position={record.coordinates!}
+                            icon={createCustomMarker(isSuspicious, isHovered)}
+                            eventHandlers={{
+                                click: () => onMarkerClick(record.id)
+                            }}
+                            zIndexOffset={isHovered ? 1000 : (isSuspicious ? 500 : 0)}
+                        >
+                            <Popup className="antigravity-popup">
+                                <div style={{ fontWeight: 600 }}>{record.person}</div>
+                                <div style={{ color: '#666', fontSize: '0.85em' }}>{record.location}</div>
+                            </Popup>
+                        </Marker>
+                    );
+                })}
+                <BoundsUpdater records={recordsWithCoords} />
+            </MapContainer>
+        </div>
     );
 };
