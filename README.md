@@ -1,9 +1,8 @@
 # Jotform Frontend Challenge Project
 
 ## User Information
-Please fill in your information after forking this repository:
 
-- **Name**: [Your Name]
+- **Name**: İsmail Yağız Güven
 
 ## Project Description
 [Add a brief description of your project here]
