@@ -21,7 +21,7 @@ export const RecordCard = ({ record, isSuspicious, onClick }: RecordCardProps) =
     return (
         <div 
             className={`record-card-hud ${finalSuspicious ? 'suspicious-hud' : ''}`}
-            style={{ borderLeftColor: accentColor, padding: '0.5rem 0.75rem' }}
+            style={{ borderLeftColor: accentColor, padding: '0.35rem 0.5rem', borderRight: 'none', borderTop: 'none', borderBottom: 'none' }}
             onClick={() => onClick && onClick(record)}
         >
             {/* ── Single-line header: badge · person · time ── */}

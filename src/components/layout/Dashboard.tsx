@@ -61,13 +61,12 @@ export const Dashboard = () => {
 
             <aside className="split-sidebar">
                 <div className="sidebar-sticky-zone">
-                    <header className="split-header" style={{ padding: '1.25rem 1.5rem' }}>
-                        <h1 className="dashboard-title m-0" style={{ fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.5px' }}>
-                            ANKARA CASE <span className="text-muted" style={{ fontWeight: 400, fontSize: '1rem', marginLeft: '0.5rem' }}>Intelligence Briefing</span>
+                    <header className="split-header" style={{ padding: '1rem 1.5rem 0.5rem' }}>
+                        <h1 className="dashboard-title m-0" style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '0.75rem' }}>
+                            ANKARA CASE <span className="text-muted" style={{ fontWeight: 400, fontSize: '0.85rem', marginLeft: '0.4rem' }}>Intelligence Briefing</span>
                         </h1>
+                        <InsightsPanel records={records} />
                     </header>
-                    
-                    <InsightsPanel records={records} />
                     
                     <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(0,0,0,0.1)' }}>
                         <SegmentedControl 

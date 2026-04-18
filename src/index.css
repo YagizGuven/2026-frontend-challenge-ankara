@@ -556,11 +556,11 @@ body {
 /* --- HUD Record Card --- */
 .record-card-hud {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: none;
   border-left: 3px solid; /* dynamic color applied inline */
-  border-radius: 6px;
-  padding: 0.75rem; /* tight and professional */
-  margin-bottom: 0.75rem;
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem; /* tight and professional */
+  margin-bottom: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -571,7 +571,6 @@ body {
 
 .record-card-hud.suspicious-hud {
   background: rgba(239, 68, 68, 0.05);
-  border-color: rgba(239, 68, 68, 0.2);
   border-left-color: var(--danger-color) !important;
 }
 
@@ -692,30 +691,54 @@ body {
   border-color: var(--accent-color);
 }
 
-/* ── Forensic tile filter — dark blue/investigation theme ─────────── */
-.forensic-tile-layer {
-  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg);
+
+/* --- Podo Trail Markers & Paths --- */
+.podo-trail-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
 }
 
-/* ── CerModern hover pulse on map marker ──────────────────────────── */
-.marker-pulse-cyan {
-  animation: markerPulseCyan 0.8s ease-in-out infinite alternate;
+.marker-glow-podo {
+  box-shadow: 0 0 15px #00f2ff;
 }
 
-@keyframes markerPulseCyan {
-  from { box-shadow: 0 0 4px 1px #22d3ee; transform: scale(1);   }
-  to   { box-shadow: 0 0 16px 4px #22d3ee; transform: scale(1.4); }
+.marker-glow-final {
+  box-shadow: 0 0 20px 5px var(--danger-color);
+  border-color: #ffcccc;
 }
 
-/* ── Dark Leaflet popup ───────────────────────────────────────────── */
-.leaflet-popup-content-wrapper {
-  background: rgba(8, 12, 22, 0.95) !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
-  border-radius: 8px !important;
-  color: #eee !important;
+.podo-pulse {
+  animation: podoPulse 2s infinite ease-in-out;
+}
+
+@keyframes podoPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-path-dash {
+  stroke-dashoffset: 100;
+  animation: dashMove 3s linear infinite;
+}
+
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.antigravity-popup .leaflet-popup-content-wrapper {
+  background: rgba(10, 15, 25, 0.9);
+  color: white;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(8px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.6) !important;
 }
-.leaflet-popup-content { color: #eee !important; }
-.leaflet-popup-tip { background: rgba(8,12,22,0.95) !important; }
-.leaflet-popup-close-button { color: #aaa !important; }
+
+.antigravity-popup .leaflet-popup-tip {
+  background: rgba(10, 15, 25, 0.9);
+}

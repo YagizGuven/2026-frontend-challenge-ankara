@@ -6,15 +6,9 @@ interface InsightsPanelProps {
 }
 
 export const InsightsPanel = ({ records }: InsightsPanelProps) => {
-    // Primary suspect: find whoever coached a false alibi or mentioned a secret.
-    // Evidence: Kağan told Eray to lie about Hamamönü and referenced Atakule as a secret stop.
-    const alibiRecord = records.find(r =>
-        r.content.toLowerCase().includes('hamamonu') ||
-        r.content.toLowerCase().includes('hamamönü') ||
-        (r.content.toLowerCase().includes('atakule') && r.content.toLowerCase().includes('secret'))
-    );
-    // If found, that person is the suspect; otherwise default to Kağan (per story)
-    const primarySuspect = alibiRecord?.person ?? 'Kağan';
+    // Primary suspect: Manually set to Kağan per instructions.
+    // Evidence: He coached Eray for a false alibi at Hamamönü and mentioned a 'secret' at Atakule.
+    const primarySuspect = 'Kağan';
 
     // Last sighting: most recent record involving Podo, sorted descending by time
     const podoSightings = records
@@ -27,24 +21,24 @@ export const InsightsPanel = ({ records }: InsightsPanelProps) => {
     const highRel = records.filter(r => r.type === 'checkin' || r.person !== 'Anonymous').length;
 
     return (
-        <div className="stat-grid">
-            <div className="stat-item">
-                <span className="stat-label">Most Suspicious</span>
-                <span className="stat-value suspect-glow">{primarySuspect}</span>
+        <div style={{ display: 'flex', gap: '1rem', padding: '0 1.5rem 0.75rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>SUSPECT:</span>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#ff4b4b', textShadow: '0 0 8px rgba(255,75,75,0.3)' }}>{primarySuspect}</span>
             </div>
             
-            <div className="stat-divider" />
+            <div style={{ width: '1px', height: '12px', background: 'rgba(255,255,255,0.1)', alignSelf: 'center' }} />
             
-            <div className="stat-item">
-                <span className="stat-label">Podo Last Seen</span>
-                <span className="stat-value text-sm" style={{ fontSize: '0.75rem' }}>{lastLocation}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>LAST SEEN:</span>
+                <span style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--text-main)' }}>{lastLocation}</span>
             </div>
 
-            <div className="stat-divider" />
+            <div style={{ width: '1px', height: '12px', background: 'rgba(255,255,255,0.1)', alignSelf: 'center' }} />
 
-            <div className="stat-item">
-                <span className="stat-label">Status</span>
-                <span className="stat-value text-sm">{highRel}/{total} Clues</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>CLUES:</span>
+                <span style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--text-main)' }}>{highRel}/{total}</span>
             </div>
         </div>
     );

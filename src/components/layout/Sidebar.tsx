@@ -19,19 +19,6 @@ export const Sidebar = ({
 }: Omit<SidebarProps, 'searchTerm' | 'setSearchTerm'>) => {
     return (
         <div className="filter-group-container">
-            <div className="mb-4">
-                <label className="sidebar-label">Urgency & Reliability</label>
-                <div style={{ marginTop: '0.5rem' }}>
-                    <SegmentedControl 
-                        options={[
-                            { label: 'All Records', value: 'all' },
-                            { label: 'High Reliability', value: 'high' }
-                        ]}
-                        value={reliability}
-                        onChange={setReliability}
-                    />
-                </div>
-            </div>
 
             <div className="mb-4">
                 <label className="sidebar-label mb-2" style={{ display: 'block' }}>Source Types</label>
@@ -43,6 +30,7 @@ export const Sidebar = ({
                                 key={type} 
                                 className={`pill-btn ${active ? 'active' : ''}`}
                                 onClick={() => toggleType(type)}
+                                style={{ padding: '0.15rem 0.5rem', fontSize: '0.7rem' }}
                             >
                                 {type.charAt(0).toUpperCase() + type.slice(1)}s
                             </button>
