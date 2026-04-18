@@ -1,4 +1,5 @@
 import type { InvestigationRecord } from '../../types/investigation';
+import { Button } from '../shared/Button';
 
 interface RecordCardProps {
     record: InvestigationRecord;
@@ -31,10 +32,11 @@ export const RecordCard = ({ record, isSuspicious, onClick }: RecordCardProps) =
                     <span className={badgeClass}>
                         {record.type}
                     </span>
-                    <h3 className="record-person">{record.person}</h3>
+                    <h3 className="record-person" style={{ fontWeight: 700 }}>{record.person}</h3>
                 </div>
-                <span className="record-time">
-                    {record.timestamp.toLocaleString()}
+                <span className="record-time" style={{ textAlign: 'right' }}>
+                    {record.timestamp.toLocaleDateString()} <br />
+                    {record.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
             </div>
             {record.location && (
@@ -46,6 +48,18 @@ export const RecordCard = ({ record, isSuspicious, onClick }: RecordCardProps) =
             <p className="record-content">
                 {record.content}
             </p>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+                <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onClick && onClick(record);
+                    }}
+                >
+                    See Details
+                </Button>
+            </div>
         </div>
     );
 };
