@@ -1,0 +1,12 @@
+import { Dashboard } from './components/layout/Dashboard';
+import './index.css';
+
+function App() {
+  return (
+    <div className="app-container">
+      <Dashboard />
+    </div>
+  );
+}
+
+export default App;
