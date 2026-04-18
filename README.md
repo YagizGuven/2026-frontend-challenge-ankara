@@ -1,61 +1,57 @@
-# Investigation Nexus (2026 Frontend Challenge)
+# Investigation Nexus - Jotform Frontend Hackathon
 
-Investigation Nexus is a responsive, modern web application built for the 2026 Frontend Challenge. It acts as a central hub to aggregate, normalize, and display critical intelligence gathered from multiple Jotform field operative forms (Check-ins, Messages, Sightings, Notes, and Tips).
+Investigation Nexus is a responsive, modern React application built for the 2026 Jotform Frontend Hackathon. It acts as a central hub to track, merge, and search across multiple data sources (Check-ins, Messages, Sightings, Notes, and Tips) submitted by field operatives and informants.
 
 ## Features
+- **Data Normalization**: Seamlessly merges multiple distinct Jotform structures into a unified, chronologically sorted timeline.
+- **Resilient Fetching**: Uses a concurrent fetching strategy (`Promise.all`) with robust mock data fallbacks to gracefully handle API rate limits (HTTP 429).
+- **Advanced Filtering**: A real-time search algorithm allowing investigators to instantly filter records by suspect name, location, content, or record type.
+- **Product Thinking & Suspicion Factor**: Distinctly visualizes data types. "Anonymous Tips" are flagged with high-visibility red markers, check-ins with emerald, and standard intel with blue accents.
+- **Premium Design**: Built using pure vanilla CSS avoiding generic frameworks like Tailwind. It utilizes glassmorphism, subtle micro-animations, and a sleek dark mode dashboard.
 
-- **Data Normalization**: Seamlessly merges disparate Jotform submission structures into a unified `InvestigationRecord` model.
-- **Resilient API Layer**: Concurrently fetches from multiple Jotform endpoints using `Promise.all` with built-in fallbacks. If Jotform's API rate limits are hit (`429 Too Many Requests`), the app automatically displays high-fidelity mock data to ensure continuous usability.
-- **Smart Filtering**: Real-time search across suspect names, locations, clue content, and record types.
-- **"Suspicion" Factor**: Visual indicators distinguish different levels of intel. For instance, anonymous tips are flagged with distinct red badges and borders to highlight potential suspicion.
-- **Premium Dark Mode Aesthetics**: Features a sleek, custom-designed dark interface using pure Vanilla CSS. Includes glassmorphism effects, fluid micro-animations, and custom scrollbars without relying on utility frameworks like Tailwind CSS.
+## Tech Stack
+- **React 18** + **TypeScript** (Bootstrapped with Vite)
+- **Vanilla CSS** (Custom properties, Flexbox, Animations)
+- **Axios** (Data fetching)
 
-## Getting Started
+## Installation & Setup
 
-### Prerequisites
-
-Ensure you have [Node.js](https://nodejs.org/) (v18 or higher recommended) and `npm` installed on your machine.
-
-### Installation & Setup
-
-1. **Clone the repository:**
+1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone <your-repo-url>
    cd 2026-frontend-challenge-ankara
    ```
 
-2. **Install dependencies:**
+2. **Install dependencies**:
+   Make sure you have Node.js installed, then run:
    ```bash
    npm install
    ```
 
-3. **Configure Environment Variables:**
-   Ensure your `.env` file is present in the root directory with the necessary Jotform API keys and Form IDs:
+3. **Environment Setup**:
+   Create a `.env` file in the root directory (if not already present) with your Jotform API configuration:
    ```env
    VITE_JOTFORM_API_KEY=your_api_key_here
-   VITE_FORM_CHECKINS=your_checkins_form_id
-   VITE_FORM_MESSAGES=your_messages_form_id
-   VITE_FORM_SIGHTINGS=your_sightings_form_id
-   VITE_FORM_NOTES=your_notes_form_id
-   VITE_FORM_TIPS=your_tips_form_id
+   VITE_FORM_CHECKINS=form_id
+   VITE_FORM_MESSAGES=form_id
+   VITE_FORM_SIGHTINGS=form_id
+   VITE_FORM_NOTES=form_id
+   VITE_FORM_TIPS=form_id
    ```
 
-4. **Run the Development Server:**
+4. **Run the Development Server**:
    ```bash
    npm run dev
    ```
-   This will start the local Vite development server. Open the provided URL (typically `http://localhost:5173`) in your browser to view the application.
+   Navigate to `http://localhost:5173` in your browser to view the application.
 
-5. **Build for Production (Optional):**
+5. **Build for Production** (Optional):
    ```bash
    npm run build
+   npm run preview
    ```
-   This command compiles TypeScript and bundles the React application for production deployment into the `dist` folder.
 
-## Technologies Used
-
-- **React 19**
-- **TypeScript**
-- **Vite**
-- **Vanilla CSS**
-- **Axios**
+## Development Decisions
+- **Why Vanilla CSS?** To maintain granular control over animations (like `slideIn`) and advanced visual filters (glassmorphism) without relying on heavy utility classes, demonstrating core styling competencies.
+- **Why Fallback Data?** To ensure the application remains evaluable and functional even when shared API keys hit their rate limits during the hackathon evaluation phase.
+- **Data Model**: Normalizing 5 disparate forms into a single `InvestigationRecord` type simplifies the UI layer significantly, allowing for scalable filtering and rendering loops.
