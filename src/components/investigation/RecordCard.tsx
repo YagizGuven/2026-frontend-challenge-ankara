@@ -2,23 +2,30 @@ import type { InvestigationRecord } from '../../types/investigation';
 
 interface RecordCardProps {
     record: InvestigationRecord;
+    isSuspicious?: boolean;
+    onClick?: (record: InvestigationRecord) => void;
 }
 
-export const RecordCard = ({ record }: RecordCardProps) => {
+export const RecordCard = ({ record, isSuspicious, onClick }: RecordCardProps) => {
     // "Suspicion" Factor Logic
-    const isSuspicious = record.type === 'tip' && record.person === 'Anonymous';
+    const isAutoSuspicious = record.type === 'tip' && record.person === 'Anonymous';
+    const finalSuspicious = isSuspicious || isAutoSuspicious;
     const isCheckin = record.type === 'checkin';
     
     let cardClass = "glass-panel record-card animate-slide-in";
-    if (isSuspicious) cardClass += " suspicious-tip";
+    if (finalSuspicious) cardClass += " suspicious-tip";
     else if (isCheckin) cardClass += " checkin-record";
 
     let badgeClass = "record-badge";
-    if (isSuspicious) badgeClass += " suspicious";
+    if (finalSuspicious) badgeClass += " suspicious";
     else if (isCheckin) badgeClass += " checkin";
 
     return (
-        <div className={cardClass} style={{ animationFillMode: 'both' }}>
+        <div 
+            className={cardClass} 
+            style={{ animationFillMode: 'both', cursor: onClick ? 'pointer' : 'default' }}
+            onClick={() => onClick && onClick(record)}
+        >
             <div className="record-header">
                 <div className="record-title-group">
                     <span className={badgeClass}>

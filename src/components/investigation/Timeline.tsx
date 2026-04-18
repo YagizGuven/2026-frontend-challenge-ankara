@@ -3,9 +3,11 @@ import { RecordCard } from './RecordCard';
 
 interface TimelineProps {
     records: InvestigationRecord[];
+    suspiciousIds: Set<string>;
+    onSelectRecord: (record: InvestigationRecord) => void;
 }
 
-export const Timeline = ({ records }: TimelineProps) => {
+export const Timeline = ({ records, suspiciousIds, onSelectRecord }: TimelineProps) => {
     if (records.length === 0) {
         return (
             <div className="glass-panel timeline-empty animate-slide-in">
@@ -26,7 +28,11 @@ export const Timeline = ({ records }: TimelineProps) => {
                 {records.map((record, index) => (
                     <div key={record.id} className="timeline-item" style={{ animationDelay: `${index * 0.05}s` }}>
                         <div className="timeline-dot"></div>
-                        <RecordCard record={record} />
+                        <RecordCard 
+                            record={record} 
+                            isSuspicious={suspiciousIds.has(record.id)}
+                            onClick={onSelectRecord}
+                        />
                     </div>
                 ))}
             </div>
