@@ -1,16 +1,42 @@
 import type { InvestigationRecord, RecordType } from '../types/investigation';
 
+/** LOCATION_COORDINATES — strict coordinate mapping.
+ *  Every record must snap to one of these exact points.
+ *  Keys are pre-normalized (lower-case ASCII, no spaces). */
+export const LOCATION_COORDINATES: Record<string, [number, number]> = {
+    'cermodern':        [39.9329, 32.8465],
+    'ankarakalesi':     [39.9416, 32.8647],
+    'kalesi':           [39.9416, 32.8647],
+    'atakule':          [39.8863, 32.8548],
+    'segmenlerparki':   [39.8972, 32.8624],
+    'segmenler':        [39.8972, 32.8624],
+    'kugulupark':       [39.9077, 32.8609],
+    'kugulu':           [39.9077, 32.8609],
+    'tunalihilmi':      [39.9045, 32.8600],
+    'tunali':           [39.9045, 32.8600],
+    'hamamonu':         [39.9344, 32.8642],
+    'kizilay':          [39.9208, 32.8541],
+    'eymir':            [39.8242, 32.8258],
+    'eymirlake':        [39.8242, 32.8258],
+};
+
+/** Normalize any location string to a plain ASCII key for LOCATION_COORDINATES.
+ *  Uses Turkish locale lower-casing (İ→i, Ğ→g, Ş→s …) and strips all spaces. */
+const toKey = (s: string): string =>
+    s.toLocaleLowerCase('tr-TR')
+     .replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ş/g, 's')
+     .replace(/ı/g, 'i').replace(/ö/g, 'o').replace(/ç/g, 'c')
+     .replace(/\s+/g, '');
+
 const getLocationCoordinates = (locationStr: string): [number, number] | undefined => {
     if (!locationStr) return undefined;
-    const lower = locationStr.toLowerCase();
-    if (lower.includes('seğmenler') || lower.includes('segmenler')) return [39.8946, 32.8631];
-    if (lower.includes('kızılay') || lower.includes('kizilay')) return [39.9208, 32.8541];
-    if (lower.includes('atakule')) return [39.8864, 32.8547];
-    if (lower.includes('tunali') || lower.includes('tunalı')) return [39.9075, 32.8617];
-    if (lower.includes('eymir')) return [39.8242, 32.8258];
-    if (lower.includes('kalesi')) return [39.9395, 32.8653]; // Ankara Kalesi
-    // Generic coordinate generator with random jitter around Ankara
-    return [39.9 + (Math.random() * 0.05 - 0.025), 32.85 + (Math.random() * 0.05 - 0.025)];
+    const key = toKey(locationStr);
+    if (LOCATION_COORDINATES[key]) return LOCATION_COORDINATES[key];
+    // Partial-match: "Seğmenler Parkı, Ankara" → matches 'segmenlerparki' then 'segmenler'
+    for (const mapKey of Object.keys(LOCATION_COORDINATES)) {
+        if (key.includes(mapKey)) return LOCATION_COORDINATES[mapKey];
+    }
+    return undefined; // no ghost markers for unknown locations
 };
 
 export const normalizeData = (rawData: any[], type: RecordType): InvestigationRecord[] => {

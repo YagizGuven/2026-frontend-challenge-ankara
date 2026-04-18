@@ -692,5 +692,30 @@ body {
   border-color: var(--accent-color);
 }
 
+/* ── Forensic tile filter — dark blue/investigation theme ─────────── */
+.forensic-tile-layer {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg);
+}
 
+/* ── CerModern hover pulse on map marker ──────────────────────────── */
+.marker-pulse-cyan {
+  animation: markerPulseCyan 0.8s ease-in-out infinite alternate;
+}
 
+@keyframes markerPulseCyan {
+  from { box-shadow: 0 0 4px 1px #22d3ee; transform: scale(1);   }
+  to   { box-shadow: 0 0 16px 4px #22d3ee; transform: scale(1.4); }
+}
+
+/* ── Dark Leaflet popup ───────────────────────────────────────────── */
+.leaflet-popup-content-wrapper {
+  background: rgba(8, 12, 22, 0.95) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+  color: #eee !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6) !important;
+}
+.leaflet-popup-content { color: #eee !important; }
+.leaflet-popup-tip { background: rgba(8,12,22,0.95) !important; }
+.leaflet-popup-close-button { color: #aaa !important; }
